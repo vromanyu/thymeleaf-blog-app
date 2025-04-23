@@ -30,11 +30,11 @@
                 <td th:text="${post.createdAt}"></td>
                 <td>
                     <a class="btn btn-outline-primary"
-                       th:href="@{/admin/post/edit/{id}(id=${post.id})}">Edit</a>
+                       th:href="@{/admin/posts/edit/{id}(id=${post.id})}">Edit</a>
                     <a class="btn btn-outline-danger"
-                       th:href="@{/admin/post/delete/{id}(id=${post.id})}">Delete</a>
+                       th:href="@{/admin/posts/delete/{id}(id=${post.id})}">Delete</a>
                     <a class="btn btn-outline-info"
-                       th:href="@{/admin/post/delete/{id}(id=${post.id})}">View</a>
+                       th:href="@{/admin/posts/delete/{id}(id=${post.id})}">View</a>
                 </td>
             </tr>
             </tbody>

@@ -39,14 +39,14 @@ public class PostController {
   return "admin/save_post";
  }
 
- @GetMapping("/admin/post/edit/{id}")
+ @GetMapping("/admin/posts/edit/{id}")
  public String editPost(@PathVariable long id, Model model) {
   PostDto post = postService.findPostById(id);
   model.addAttribute("post", post);
   return "admin/save_post";
  }
 
- @GetMapping("/admin/post/delete/{id}")
+ @GetMapping("/admin/posts/delete/{id}")
  public String deletePost(@PathVariable long id) {
   postService.deletePostById(id);
   return "redirect:/admin/posts";
