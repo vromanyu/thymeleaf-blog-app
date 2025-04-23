@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header.html :: header-fragment}">
+    <title></title>
+</head>
+<body>
+<nav th:replace="~{/fragments/navbar :: navbar-fragmet}">
+</nav>
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <h1>List Blog Posts</h1>
+        </div>
+        <table class="table table-hover table-bordered table-striped">
+            <thead class="thead-light">
+            <tr>
+                <th style="width: 10%" scope="col">#</th>
+                <th style="width: 20%" scope="col">Post Title</th>
+                <th style="width: 30%" scope="col">Post Short Description</th>
+                <th style="width: 20%" scope="col">Post Created On</th>
+                <th style="width: 20%" scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post, details : ${posts}">
+                <th scope="row" th:text="${details.index + 1}"></th>
+                <td th:text="${post.title}"></td>
+                <td th:text="${post.shortDescription}"></td>
+                <td th:text="${post.createdAt}"></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer th:replace="~{/fragments/footer.html :: footer-fragmet}">
+</footer>
+</body>
+</html>
