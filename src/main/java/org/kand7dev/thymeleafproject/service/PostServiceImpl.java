@@ -8,6 +8,8 @@ import org.kand7dev.thymeleafproject.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +19,7 @@ public class PostServiceImpl implements PostService {
 
  @Override
  public List<PostDto> findAllPosts() {
-  return postRepository.findAll().stream().map(PostMapper::mapToPostDto).toList();
+  return postRepository.findAll().stream().map(PostMapper::mapToPostDto).collect(Collectors.toList());
  }
 
  @Override
@@ -26,4 +28,14 @@ public class PostServiceImpl implements PostService {
   postRepository.save(post);
  }
 
+ @Override
+ public PostDto findPostById(long id) {
+  Optional<Post> post = postRepository.findById(id);
+  return post.map(PostMapper::mapToPostDto).orElseThrow();
+ }
+
+ @Override
+ public void deletePostById(long id) {
+  postRepository.deleteById(id);
+ }
 }
