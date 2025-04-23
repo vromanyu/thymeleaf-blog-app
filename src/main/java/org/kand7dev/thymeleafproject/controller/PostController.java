@@ -52,4 +52,15 @@ public class PostController {
   return "redirect:/admin/posts";
  }
 
+ @GetMapping("/admin/posts/{postUrl}/view")
+ public String viewPost(@PathVariable String postUrl, Model model) {
+  PostDto post = postService.findPostByUrl(postUrl);
+  model.addAttribute("post", post);
+  return "admin/view_post";
+ }
+
+ @GetMapping("/admin/posts/search")
+ public String searchPosts(Model model) {
+  
+ }
 }

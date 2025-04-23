@@ -33,8 +33,8 @@
                        th:href="@{/admin/posts/edit/{id}(id=${post.id})}">Edit</a>
                     <a class="btn btn-outline-danger"
                        th:href="@{/admin/posts/delete/{id}(id=${post.id})}">Delete</a>
-                    <a class="btn btn-outline-info"
-                       th:href="@{/admin/posts/delete/{id}(id=${post.id})}">View</a>
+                    <a class="btn btn-outline-secondary"
+                       th:href="@{/admin/posts/{postUrl}/view(postUrl=${post.url})}">View</a>
                 </td>
             </tr>
             </tbody>

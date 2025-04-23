@@ -38,4 +38,16 @@ public class PostServiceImpl implements PostService {
  public void deletePostById(long id) {
   postRepository.deleteById(id);
  }
+
+ @Override
+ public PostDto findPostByUrl(String url) {
+  Post post = postRepository.findByUrl(url).orElseThrow();
+  return PostMapper.mapToPostDto(post);
+ }
+
+ @Override
+ public List<PostDto> searchPosts(String title, String shortDescription) {
+  return postRepository.findByTitleLikeIgnoreCaseOrShortDescriptionLikeIgnoreCase(title, shortDescription).stream().map(PostMapper::mapToPostDto).collect(Collectors.toList());
+ }
+ 
 }
