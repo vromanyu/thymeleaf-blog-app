@@ -8,9 +8,7 @@ import org.kand7dev.thymeleafproject.util.PostUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,10 +23,10 @@ public class PostController {
  }
 
  @PostMapping("/admin/posts")
- public String addPost(@Valid @ModelAttribute("post") PostDto postDto, BindingResult result, Model model) {
+ public String savePost(@Valid @ModelAttribute("post") PostDto postDto, BindingResult result, Model model) {
   if (result.hasErrors()) {
    model.addAttribute("post", postDto);
-   return "/admin/create_post";
+   return "admin/save_post";
   }
   postDto.setUrl(PostUtility.getUrl(postDto.getTitle()));
   postService.save(postDto);
@@ -38,6 +36,20 @@ public class PostController {
  @GetMapping("/admin/posts/new")
  public String newPost(Model model) {
   model.addAttribute("post", new PostDto());
-  return "/admin/create_post";
+  return "admin/save_post";
  }
+
+ @GetMapping("/admin/post/edit/{id}")
+ public String editPost(@PathVariable long id, Model model) {
+  PostDto post = postService.findPostById(id);
+  model.addAttribute("post", post);
+  return "admin/save_post";
+ }
+
+ @GetMapping("/admin/post/delete/{id}")
+ public String deletePost(@PathVariable long id) {
+  postService.deletePostById(id);
+  return "redirect:/admin/posts";
+ }
+
 }
