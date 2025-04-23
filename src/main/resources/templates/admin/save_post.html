@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/header.html :: header-fragment}">
+    <title></title>
+</head>
+<body>
+<nav th:replace="~{/fragments/navbar.html :: navbar-fragmet}"></nav>
+<div class="row col-md-8 offset-md-2">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="display-6 text-center">Create Post</h2>
+        </div>
+        <div class="card-body">
+            <form role="form" method="post" th:action="@{/admin/posts}" th:object="${post}">
+                <div class="mb-3">
+                    <input type="hidden" th:field="*{id}"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input id="title" name="title"
+                           type="text" class="form-control"
+                           placeholder="enter post title" th:field="*{title}"
+                    />
+                    <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}">
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="short-description">Short Description</label>
+                    <textarea id="short-description" name="short-description"
+                              class="form-control" placeholder="enter post short description"
+                              rows="3" th:field="*{shortDescription}">
+          </textarea>
+                    <p th:if="${#fields.hasErrors('shortDescription')}" class="text-danger"
+                       th:errors="*{shortDescription}">
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="content">Content</label>
+                    <textarea id="content" name="content"
+                              class="form-control" placeholder="enter post content"
+                              rows="12" th:field="*{content}">
+          </textarea>
+                    <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}">
+                    </p>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-dark btn-lg">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer th:replace="~{/fragments/footer.html :: footer-fragmet}"></footer>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/45.0.0/ckeditor5.umd.js"></script>
+<script>
+    const {
+        ClassicEditor,
+        Essentials,
+        Bold,
+        Italic,
+        Font,
+        Paragraph
+    } = CKEDITOR;
+
+    ClassicEditor
+        .create(document.querySelector('#content'), {
+            licenseKey: 'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NDY2NjIzOTksImp0aSI6IjJlYTYyNzMwLWQ1NzktNGExMS04YmViLWRiNjk2YWNjNDhmMiIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6IjEyMjIxMDAzIn0.jVK1MBtdZxH0DfIHv59etVKjpl6IPZjpM5iZWRAdi757u7CV2BJmxPrmInBh14fSC1wotJwNs0LbakZCt1XPsw', // Create a free account on https://portal.ckeditor.com/checkout?plan=free
+            plugins: [Essentials, Bold, Italic, Font, Paragraph],
+            toolbar: [
+                'undo', 'redo', '|', 'bold', 'italic', '|',
+                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+            ]
+        })
+        .then(editor => {
+            window.editor = editor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+</body>
+</html>
