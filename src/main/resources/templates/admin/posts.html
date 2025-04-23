@@ -19,7 +19,7 @@
                 <th style="width: 20%" scope="col">Post Title</th>
                 <th style="width: 30%" scope="col">Post Short Description</th>
                 <th style="width: 20%" scope="col">Post Created On</th>
-                <th style="width: 15%" scope="col">Actions</th>
+                <th style="width: 15.5%" scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -31,7 +31,10 @@
                 <td>
                     <a class="btn btn-outline-primary"
                        th:href="@{/admin/post/edit/{id}(id=${post.id})}">Edit</a>
-                    <a class="btn btn-outline-danger" th:href="@{/admin/post/delete/{id}(id=${post.id})}">Delete</a>
+                    <a class="btn btn-outline-danger"
+                       th:href="@{/admin/post/delete/{id}(id=${post.id})}">Delete</a>
+                    <a class="btn btn-outline-info"
+                       th:href="@{/admin/post/delete/{id}(id=${post.id})}">View</a>
                 </td>
             </tr>
             </tbody>
