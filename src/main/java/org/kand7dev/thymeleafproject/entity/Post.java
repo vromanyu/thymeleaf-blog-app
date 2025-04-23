@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -34,7 +35,7 @@ public class Post {
  @CreationTimestamp(source = SourceType.DB)
  private LocalDateTime createdAt;
 
- @CreationTimestamp(source = SourceType.DB)
+ @UpdateTimestamp(source = SourceType.DB)
  private LocalDateTime updatedAt;
 
  public Post(String title, String url, String content, String shortDescription) {
