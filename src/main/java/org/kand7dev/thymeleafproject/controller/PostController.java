@@ -2,7 +2,9 @@ package org.kand7dev.thymeleafproject.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.kand7dev.thymeleafproject.dto.CommentDto;
 import org.kand7dev.thymeleafproject.dto.PostDto;
+import org.kand7dev.thymeleafproject.service.CommentService;
 import org.kand7dev.thymeleafproject.service.PostService;
 import org.kand7dev.thymeleafproject.util.PostUtility;
 import org.springframework.stereotype.Controller;
@@ -10,11 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class PostController {
 
  private final PostService postService;
+ private final CommentService commentService;
 
  @GetMapping("/admin/posts")
  public String posts(Model model) {
@@ -63,5 +68,18 @@ public class PostController {
  public String searchPosts(@RequestParam("query") String query, Model model) {
   model.addAttribute("posts",postService.searchPosts(query));
   return "admin/posts";
+ }
+
+ @GetMapping("/admin/posts/comments")
+ public String postComments(Model model) {
+  List<CommentDto> comments = commentService.findAllComments();
+  model.addAttribute("comments",comments);
+  return "admin/comments";
+ }
+
+ @GetMapping("/admin/posts/comments/{commentId}")
+ public String deleteComment(@PathVariable("commentId") long commentId){
+  commentService.deleteCommentById(commentId);
+  return "redirect:/admin/posts/comments";
  }
 }

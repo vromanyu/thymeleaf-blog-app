@@ -51,9 +51,4 @@ public class Post {
   this.shortDescription = shortDescription;
  }
 
- public void addComment(Comment comment) {
-  comment.setPost(this);
-  comments.add(comment);
- }
-
 }

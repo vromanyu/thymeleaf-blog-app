@@ -29,4 +29,6 @@ public class CommentDto {
 
  private LocalDateTime updatedAt;
 
+ private String postUrl;
+
 }

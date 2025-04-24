@@ -3,6 +3,8 @@ package org.kand7dev.thymeleafproject.mapper;
 import org.kand7dev.thymeleafproject.dto.PostDto;
 import org.kand7dev.thymeleafproject.entity.Post;
 
+import java.util.stream.Collectors;
+
 public class PostMapper {
 
  public static PostDto mapToPostDto(Post post) {
@@ -14,6 +16,7 @@ public class PostMapper {
   postDto.setShortDescription(post.getShortDescription());
   postDto.setCreatedAt(post.getCreatedAt());
   postDto.setUpdatedAt(post.getUpdatedAt());
+  postDto.setComments(post.getComments().stream().map(CommentMapper::mapToCommentDto).collect(Collectors.toList()));
   return postDto;
  }
 
