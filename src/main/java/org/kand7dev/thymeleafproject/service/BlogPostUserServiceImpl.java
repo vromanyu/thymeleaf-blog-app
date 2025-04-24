@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.kand7dev.thymeleafproject.dto.BlogPostUserDto;
 import org.kand7dev.thymeleafproject.entity.BlogPostUser;
 import org.kand7dev.thymeleafproject.repository.BlogPostUserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,14 +14,15 @@ import java.util.Optional;
 public class BlogPostUserServiceImpl implements BlogPostUserService {
 
  private final BlogPostUserRepository blogPostUserRepository;
+ private final PasswordEncoder passwordEncoder;
 
  @Override
  public void saveUser(BlogPostUserDto blogPostUserDto) {
   BlogPostUser blogPostUser = new BlogPostUser();
   blogPostUser.setName(blogPostUserDto.getFirstName() + " " + blogPostUserDto.getLastName());
   blogPostUser.setEmail(blogPostUserDto.getEmail());
-  blogPostUser.setPassword(blogPostUserDto.getPassword());
-  blogPostUser.setRole("ROLE_USER");
+  blogPostUser.setPassword(passwordEncoder.encode(blogPostUserDto.getPassword()));
+  blogPostUser.setRole("USER");
   blogPostUserRepository.save(blogPostUser);
  }
 
