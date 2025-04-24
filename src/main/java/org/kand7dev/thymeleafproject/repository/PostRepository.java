@@ -11,5 +11,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
  Optional<Post> findByUrl(String url);
 
  @Query("select p from Post p where (upper(p.title) like '%' || upper(:title) || '%') or (upper(p.shortDescription) like '%' || upper(:title) || '%')")
- List<Post> searchPostsByTitleOrShortDescription(String title);
+ List<Post> searchPostsByTitleOrShortDescription(String query);
 }

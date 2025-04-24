@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/blog-fragments/header.html :: header-fragment">
     <meta charset="UTF-8">
     <title></title>
@@ -8,29 +8,33 @@ xmlns:th="http://www.thymeleaf.org">
 <body>
 <nav th:replace="/blog-fragments/navbar.html :: navbar-fragmet"></nav>
 <div class="container">
-    <div class="col-md-9">
-        <div th:each="post : ${posts}">
-            <div class="card">
-                <div class="card-header">
-                    <h3>
-                        <a th:href="@{/post/{postUrl}(postUrl=${post.url})}" th:text="${post.title}"></a>
-                    </h3>
-                    <div>
-                        <strong class="h6" th:text="${#temporals.format(post.createdAt, 'dd/MM/yyyy')}">
-                        </strong>
+    <div class="row">
+        <div class="col-md-9">
+            <div th:each="post : ${posts}">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>
+                            <a th:href="@{/post/{postUrl}(postUrl=${post.url})}" th:text="${post.title}"></a>
+                        </h3>
+                        <div>
+                            <strong class="h6" th:text="${#temporals.format(post.createdAt, 'dd/MM/yyyy')}">
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <span th:text="${post.shortDescription}"></span>
+                        <a th:href="@{/post/{postUrl}(postUrl=${post.url})}">Read more</a>
                     </div>
                 </div>
-                <div class="card-body">
-                    <span th:text="${post.shortDescription}"></span>
-                    <a th:href="@{/post/{postUrl}(postUrl=${post.url})}">Read more</a>
-                </div>
+                <br>
             </div>
         </div>
-    </div>
-    <div class="col-md-3">
-
+        <div class="col-md-3">
+            <div th:replace="~{/blog-fragments/search.html :: search-fragment}"></div>
+        </div>
     </div>
 </div>
+<br>
 <footer th:replace="/blog-fragments/footer.html :: footer-fragmet"></footer>
 </body>
 </html>

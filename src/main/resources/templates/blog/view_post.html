@@ -17,11 +17,11 @@
                 <div th:utext="${post.content}"></div>
         </div>
         <div class="col-md-3">
-
+            <div th:replace="~{/blog-fragments/search.html :: search-fragment}"></div>
         </div>
     </div>
 </div>
-
+<br>
 <footer th:replace="/blog-fragments/footer.html :: footer-fragmet"></footer>
 </body>
 </html>
