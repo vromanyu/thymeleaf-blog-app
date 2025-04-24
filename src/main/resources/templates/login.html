@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{blog-fragments/header.html :: header-fragment}">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<nav th:replace="~{/blog-fragments/navbar.html :: navbar-fragmet}"></nav>
+<div class="container">
+    <div class="row text-center">
+        <div th:if="${param.logout}">
+            <div class="alert alert-success">Logged out successfully</div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h2 class="h2">Login</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" th:action="@{/login}"
+                      class="form-horizontal" role="form">
+                    <div class="form-group mb-3">
+                        <label class="control-label" for="username">Email</label>
+                        <input type="text" id="username" name="username" class="form-control"
+                               placeholder="enter email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="control-label" for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control"
+                               placeholder="enter password">
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                    <div>
+                        <span>Not Registered yet?
+                        <a th:href="@{/register}">Register</a>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<footer th:replace="~{/blog-fragments/footer.html :: footer-fragmet}"></footer>
+</body>
+</html>

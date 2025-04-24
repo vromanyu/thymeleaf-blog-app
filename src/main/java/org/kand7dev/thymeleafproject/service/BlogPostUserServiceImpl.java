@@ -20,7 +20,7 @@ public class BlogPostUserServiceImpl implements BlogPostUserService {
   blogPostUser.setName(blogPostUserDto.getFirstName() + " " + blogPostUserDto.getLastName());
   blogPostUser.setEmail(blogPostUserDto.getEmail());
   blogPostUser.setPassword(blogPostUserDto.getPassword());
-  blogPostUser.setRole("USER");
+  blogPostUser.setRole("ROLE_USER");
   blogPostUserRepository.save(blogPostUser);
  }
 

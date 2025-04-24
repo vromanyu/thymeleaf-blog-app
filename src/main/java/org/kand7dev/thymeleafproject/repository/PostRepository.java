@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post, Long> {
  Optional<Post> findByUrl(String url);
 
- @Query("select p from Post p where (upper(p.title) like '%' || upper(:title) || '%') or (upper(p.shortDescription) like '%' || upper(:title) || '%')")
+ @Query("select p from Post p where (upper(p.title) like '%' || upper(:query) || '%') or (upper(p.shortDescription) like '%' || upper(:query) || '%')")
  List<Post> searchPostsByTitleOrShortDescription(String query);
 }
