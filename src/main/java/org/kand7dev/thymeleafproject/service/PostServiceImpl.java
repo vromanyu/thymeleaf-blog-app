@@ -46,8 +46,8 @@ public class PostServiceImpl implements PostService {
  }
 
  @Override
- public List<PostDto> searchPosts(String title, String shortDescription) {
-  return postRepository.findByTitleLikeIgnoreCaseOrShortDescriptionLikeIgnoreCase(title, shortDescription).stream().map(PostMapper::mapToPostDto).collect(Collectors.toList());
+ public List<PostDto> searchPosts(String title) {
+  return postRepository.searchPostsByTitleOrShortDescription(title).stream().map(PostMapper::mapToPostDto).collect(Collectors.toList());
  }
- 
+
 }

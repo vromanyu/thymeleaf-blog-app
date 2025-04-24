@@ -60,7 +60,8 @@ public class PostController {
  }
 
  @GetMapping("/admin/posts/search")
- public String searchPosts(Model model) {
-  
+ public String searchPosts(@RequestParam("query") String query, Model model) {
+  model.addAttribute("posts",postService.searchPosts(query));
+  return "admin/posts";
  }
 }

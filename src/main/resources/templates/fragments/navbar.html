@@ -6,7 +6,7 @@ xmlns:th="http://www.thymeleaf.org">
 </head>
 <body>
 <nav th:fragment="navbar-fragmet" class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 5%">
-    <span class="navbar-brand" style="margin-left: 2%">Spring Boot Thymeleaf Blog Application</span>
+    <a class="navbar-brand" style="margin-left: 2%" th:href="@{/admin/posts}">Spring Boot Thymeleaf Blog Application</a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link" th:href="@{/admin/posts}">Posts</a>
