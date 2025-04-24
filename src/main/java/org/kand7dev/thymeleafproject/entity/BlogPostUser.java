@@ -24,16 +24,6 @@ public class BlogPostUser {
  @Column(nullable = false)
  private String password;
 
- @Column(nullable = false)
  private String role = "USER";
 
- public BlogPostUser(String name, String email, String password, String role) {
-  this.name = name;
-  this.email = email;
-  this.password = password;
-  if (role != null) {
-   this.role = role;
-  }
-
- }
 }
