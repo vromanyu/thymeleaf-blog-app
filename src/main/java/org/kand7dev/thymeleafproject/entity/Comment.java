@@ -4,36 +4,30 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
-public class Post {
+public class Comment {
 
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private long id;
 
  @Column(nullable = false)
- private String title;
-
- private String url;
+ private String name;
 
  @Column(nullable = false)
+ private String email;
+
  @Lob
  private String content;
-
- private String shortDescription;
 
  @CreationTimestamp(source = SourceType.DB)
  private LocalDateTime createdAt;
@@ -41,19 +35,15 @@ public class Post {
  @UpdateTimestamp(source = SourceType.DB)
  private LocalDateTime updatedAt;
 
- @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
- private List<Comment> comments = new ArrayList<>();
+ @ManyToOne
+ @JoinColumn
+ private Post post;
 
- public Post(String title, String url, String content, String shortDescription) {
-  this.title = title;
-  this.url = url;
+ public Comment(String name, String email, String content, Post post) {
+  this.name = name;
+  this.email = email;
   this.content = content;
-  this.shortDescription = shortDescription;
- }
-
- public void addComment(Comment comment) {
-  comment.setPost(this);
-  comments.add(comment);
+  this.post = post;
  }
 
 }
