@@ -28,4 +28,5 @@ public class PostMapper {
   post.setUpdatedAt(postDto.getUpdatedAt());
   return post;
  }
+
 }
