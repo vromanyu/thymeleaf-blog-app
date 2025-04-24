@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/fragments/header.html :: header-fragment}">
+<head th:replace="~{/admin-fragments/header.html :: header-fragment}">
     <title></title>
 </head>
 <body>
-<nav th:replace="~{/fragments/navbar :: navbar-fragmet}">
+<nav th:replace="~{/admin-fragments/navbar :: navbar-fragmet}">
 </nav>
 <div class="container-fluid">
     <div class="container">
@@ -44,7 +44,7 @@
                 <th scope="row" th:text="${details.index + 1}"></th>
                 <td th:text="${post.title}"></td>
                 <td th:text="${post.shortDescription}"></td>
-                <td th:text="${post.createdAt}"></td>
+                <td th:text="${#temporals.format(post.createdAt, 'dd/MM/yyyy HH:mm:ss')}"></td>
                 <td>
                     <a class="btn btn-outline-primary"
                        th:href="@{/admin/posts/edit/{id}(id=${post.id})}">Edit</a>
@@ -58,7 +58,7 @@
         </table>
     </div>
 </div>
-<footer th:replace="~{/fragments/footer.html :: footer-fragmet}">
+<footer th:replace="~{/admin-fragments/footer.html :: footer-fragmet}">
 </footer>
 </body>
 </html>

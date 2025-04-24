@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+</head>
+<body>
+<nav th:fragment="navbar-fragmet" class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 5%">
+    <a class="navbar-brand" style="margin-left: 2%" th:href="@{/}">Spring Boot Thymeleaf Blog Application</a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" th:href="@{/}">Posts</a>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
