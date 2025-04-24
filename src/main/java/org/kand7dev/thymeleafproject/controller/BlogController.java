@@ -1,6 +1,7 @@
 package org.kand7dev.thymeleafproject.controller;
 
 import lombok.AllArgsConstructor;
+import org.kand7dev.thymeleafproject.dto.CommentDto;
 import org.kand7dev.thymeleafproject.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ public class BlogController {
  @GetMapping("/post/{postUrl}")
  public String viewPost(@PathVariable String postUrl, Model model){
   model.addAttribute("post", postService.findPostByUrl(postUrl));
+  model.addAttribute("comment", new CommentDto());
   return "blog/view_post";
  }
 
