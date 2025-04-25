@@ -20,7 +20,7 @@ It allows you to create, edit, view, comment, and delete blog posts with ease. A
 ## Setup Instructions 🔧
 A Dockerfile and a docker-compose file are included in the repository. For convenience and better dependency management, I suggest using docker-compose to run the application, as it encapsulates all required dependencies and services.
 
-## Screenshots
+## Screenshots 📸
 
 
 ![Screenshot 2025-04-25 212634](https://github.com/user-attachments/assets/eb632ff1-596f-454c-84a5-bd7a7e588b3b)
