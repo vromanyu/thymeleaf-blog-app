@@ -4,7 +4,7 @@ ENV GRADLE_OPTS="-Dorg.gradle.daemon=false"
 
 WORKDIR /app
 COPY . .
-RUN ./gradlew clean build -x test
+RUN ./gradlew clean bootJar -x test
 
 FROM openjdk:21-oracle
 WORKDIR /thymeleaf-blog
