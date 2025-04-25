@@ -7,6 +7,8 @@ import org.kand7dev.thymeleafproject.dto.PostDto;
 import org.kand7dev.thymeleafproject.service.CommentService;
 import org.kand7dev.thymeleafproject.service.PostService;
 import org.kand7dev.thymeleafproject.util.PostUtility;
+import org.kand7dev.thymeleafproject.util.Role;
+import org.kand7dev.thymeleafproject.util.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,7 +25,14 @@ public class PostController {
 
  @GetMapping("/admin/posts")
  public String posts(Model model) {
-  model.addAttribute("posts", postService.findAllPosts());
+  String role = SecurityUtils.getCurrentUserRole();
+  List<PostDto> posts;
+  if (Role.ROLE_ADMIN.name().equals(role)) {
+   posts = postService.findAllPosts();
+  } else {
+   posts = postService.findAllPostsByLoggedInUser();
+  }
+  model.addAttribute("posts", posts);
   return "/admin/posts";
  }
 
@@ -72,7 +81,13 @@ public class PostController {
 
  @GetMapping("/admin/posts/comments")
  public String postComments(Model model) {
-  List<CommentDto> comments = commentService.findAllComments();
+  String role = SecurityUtils.getCurrentUserRole();
+  List<CommentDto> comments;
+  if (Role.ROLE_ADMIN.name().equals(role)) {
+   comments = commentService.findAllComments();
+  } else {
+   comments = commentService.findAllCommentsForLoggedInUser();
+  }
   model.addAttribute("comments",comments);
   return "admin/comments";
  }

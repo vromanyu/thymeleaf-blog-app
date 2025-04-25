@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -18,12 +21,15 @@ public class BlogPostUser {
  @Column(nullable = false)
  private String name;
 
- @Column(nullable = false)
+ @Column(nullable = false, unique = true)
  private String email;
 
  @Column(nullable = false)
  private String password;
 
  private String role = "USER";
+
+ @OneToMany(mappedBy = "blogPostUser")
+ private List<Post> posts = new ArrayList<>();
 
 }

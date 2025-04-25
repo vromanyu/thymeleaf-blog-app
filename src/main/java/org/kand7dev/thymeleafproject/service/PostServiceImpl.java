@@ -2,12 +2,18 @@ package org.kand7dev.thymeleafproject.service;
 
 import lombok.RequiredArgsConstructor;
 import org.kand7dev.thymeleafproject.dto.PostDto;
+import org.kand7dev.thymeleafproject.entity.BlogPostUser;
 import org.kand7dev.thymeleafproject.entity.Post;
 import org.kand7dev.thymeleafproject.mapper.PostMapper;
+import org.kand7dev.thymeleafproject.repository.BlogPostUserRepository;
 import org.kand7dev.thymeleafproject.repository.PostRepository;
+import org.kand7dev.thymeleafproject.util.Role;
+import org.kand7dev.thymeleafproject.util.SecurityUtils;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -16,6 +22,7 @@ import java.util.stream.Collectors;
 public class PostServiceImpl implements PostService {
 
  private final PostRepository postRepository;
+ private final BlogPostUserRepository blogPostUserRepository;
 
  @Override
  public List<PostDto> findAllPosts() {
@@ -23,8 +30,17 @@ public class PostServiceImpl implements PostService {
  }
 
  @Override
+ public List<PostDto> findAllPostsByLoggedInUser() {
+  String email = Objects.requireNonNull(SecurityUtils.getCurrentUser()).getUsername();
+  return postRepository.findAllByBlogPostUser_Email(email).stream().map(PostMapper::mapToPostDto).collect(Collectors.toList());
+ }
+
+ @Override
  public void save(PostDto postDto) {
+  String email = Objects.requireNonNull(SecurityUtils.getCurrentUser()).getUsername();
+  BlogPostUser user = blogPostUserRepository.findByEmail(email).orElse(null);
   Post post = PostMapper.mapToPost(postDto);
+  post.setBlogPostUser(user);
   postRepository.save(post);
  }
 
@@ -47,7 +63,13 @@ public class PostServiceImpl implements PostService {
 
  @Override
  public List<PostDto> searchPosts(String title) {
-  return postRepository.searchPostsByTitleOrShortDescription(title).stream().map(PostMapper::mapToPostDto).collect(Collectors.toList());
+  User user = Objects.requireNonNull(SecurityUtils.getCurrentUser());
+  String userRole = SecurityUtils.getCurrentUserRole();
+  if (Role.ROLE_ADMIN.name().equals(userRole)) {
+   return postRepository.searchAllPostsByTitleOrShortDescription(title).stream().map(PostMapper::mapToPostDto).collect(Collectors.toList());
+  } else {
+   return postRepository.searchAllPostsByTitleOrShortDescriptionForCurrentUser(title, user.getUsername()).stream().map(PostMapper::mapToPostDto).collect(Collectors.toList());
+  }
  }
 
 }

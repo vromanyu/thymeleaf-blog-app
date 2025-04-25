@@ -7,9 +7,11 @@ import org.kand7dev.thymeleafproject.entity.Post;
 import org.kand7dev.thymeleafproject.mapper.CommentMapper;
 import org.kand7dev.thymeleafproject.repository.CommentRepository;
 import org.kand7dev.thymeleafproject.repository.PostRepository;
+import org.kand7dev.thymeleafproject.util.SecurityUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +33,12 @@ public class CommentServiceImpl implements CommentService{
  @Override
  public List<CommentDto> findAllComments() {
   return commentRepository.findAll().stream().map(CommentMapper::mapToCommentDto).collect(Collectors.toList());
+ }
+
+ @Override
+ public List<CommentDto> findAllCommentsForLoggedInUser() {
+  String email = Objects.requireNonNull(SecurityUtils.getCurrentUser()).getUsername();
+  return commentRepository.findCommentsByPost_BlogPostUser_Email(email).stream().map(CommentMapper::mapToCommentDto).collect(Collectors.toList());
  }
 
  @Override

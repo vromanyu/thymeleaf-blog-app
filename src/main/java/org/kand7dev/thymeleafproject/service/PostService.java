@@ -7,6 +7,8 @@ import java.util.List;
 public interface PostService {
  List<PostDto> findAllPosts();
 
+ List<PostDto> findAllPostsByLoggedInUser();
+
  void save(PostDto postDto);
 
  PostDto findPostById(long id);

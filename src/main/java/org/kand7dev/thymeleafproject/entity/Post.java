@@ -44,6 +44,10 @@ public class Post {
  @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
  private List<Comment> comments = new ArrayList<>();
 
+ @ManyToOne
+ @JoinColumn
+ private BlogPostUser blogPostUser;
+
  public Post(String title, String url, String content, String shortDescription) {
   this.title = title;
   this.url = url;

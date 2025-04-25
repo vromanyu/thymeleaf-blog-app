@@ -7,5 +7,6 @@ import java.util.List;
 public interface CommentService {
  void saveComment(String postUrl, CommentDto commentDto);
  List<CommentDto> findAllComments();
+ List<CommentDto> findAllCommentsForLoggedInUser();
  void deleteCommentById(long id);
 }
