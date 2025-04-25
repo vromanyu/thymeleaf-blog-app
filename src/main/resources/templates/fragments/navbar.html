@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title></title>
+</head>
+<body>
+<nav th:fragment="navbar-fragmet" class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 5%">
+    <a class="navbar-brand" style="margin-left: 2%" th:href="@{/}">Spring Boot Thymeleaf Blog Application</a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" th:href="@{/}">Posts</a>
+            <a sec:authorize="isAuthenticated()" class="nav-item nav-link" th:href="@{/admin/posts}">User Portal</a>
+            <a sec:authorize="isAuthenticated()" class="nav-item nav-link" th:href="@{/admin/posts/new}">Add Post</a>
+            <a sec:authorize="isAuthenticated()" class="nav-item nav-link" th:href="@{/admin/posts/comments}">Comments</a>
+            <a sec:authorize="!isAuthenticated()" class="nav-item nav-link" th:href="@{/register}">Sign Up</a>
+            <a sec:authorize="!isAuthenticated()" class="nav-item nav-link" th:href="@{/login}">Login</a>
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" role="form">
+                <button class="nav-item nav-link">Logout</button>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            </form>
+        </div>
+    </div>
+    <div sec:authorize="isAuthenticated()"class="d-flex flex-row-reverse bd-highlight navbar-brand">
+        <p>Welcome, <span sec:authentication="name"></span></p>
+    </div>
+</nav>
+</body>
+</html>
