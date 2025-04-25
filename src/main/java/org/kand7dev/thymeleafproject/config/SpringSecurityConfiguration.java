@@ -36,7 +36,7 @@ public class SpringSecurityConfiguration {
    .authorizeHttpRequests(requests ->
     requests
      .requestMatchers("/admin/**").hasAnyRole("ADMIN", "USER")
-     .requestMatchers("/register/**","/", "/post/**", "/page/**", "/*/comments", "/error").permitAll()
+     .requestMatchers("/register/**", "/", "/post/**", "/page/**", "/*/comments", "/error").permitAll()
      .anyRequest().authenticated()
    )
    .formLogin(form ->

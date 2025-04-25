@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/fragments/header.html :: header-fragment}">
+<head th:replace="~{fragments/header.html :: header-fragment}">
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
-<nav th:replace="~{/fragments/navbar.html :: navbar-fragmet}"></nav>
+<nav th:replace="~{fragments/navbar.html :: navbar-fragmet}"></nav>
 <div class="container">
     <div class="row">
         <h1>List of Comments</h1>
@@ -29,7 +29,7 @@
                 <td th:text="${#temporals.format(comment.createdAt, 'dd/MM/yyyy')}"></td>
                 <td>
                     <a class="btn btn-outline-danger"
-                    th:href="@{/admin/posts/comments/{commentId}(commentId=${comment.id})}">
+                       th:href="@{/admin/posts/comments/{commentId}(commentId=${comment.id})}">
                         Delete
                     </a>
                     <a class="btn btn-outline-secondary"
@@ -46,6 +46,6 @@
 <br>
 <br>
 <br>
-<footer th:replace="~{/fragments/footer.html :: footer-fragmet}"></footer>
+<footer th:replace="~{fragments/footer.html :: footer-fragmet}"></footer>
 </body>
 </html>

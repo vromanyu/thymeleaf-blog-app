@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/fragments/header.html :: header-fragment}">
+<head th:replace="~{fragments/header.html :: header-fragment}">
     <title></title>
 </head>
 <body>
-<nav th:replace="~{/fragments/navbar :: navbar-fragmet}">
+<nav th:replace="~{fragments/navbar :: navbar-fragmet}">
 </nav>
 <div class="container-fluid">
     <div class="container">
@@ -32,7 +32,7 @@
         <table class="table table-hover table-bordered table-striped">
             <thead class="thead-light">
             <tr>
-                    <th style="width: 10%" scope="col">#</th>
+                <th style="width: 10%" scope="col">#</th>
                 <th style="width: 20%" scope="col">Post Title</th>
                 <th style="width: 30%" scope="col">Post Short Description</th>
                 <th style="width: 20%" scope="col">Post Created On</th>
@@ -59,7 +59,7 @@
     </div>
 </div>
 <br>
-<footer th:replace="~{/fragments/footer.html :: footer-fragmet}">
+<footer th:replace="~{fragments/footer.html :: footer-fragmet}">
 </footer>
 </body>
 </html>

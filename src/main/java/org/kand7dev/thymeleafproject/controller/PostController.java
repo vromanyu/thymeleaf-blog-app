@@ -33,7 +33,7 @@ public class PostController {
    posts = postService.findAllPostsByLoggedInUser();
   }
   model.addAttribute("posts", posts);
-  return "/admin/posts";
+  return "admin/posts";
  }
 
  @PostMapping("/admin/posts")
@@ -75,7 +75,7 @@ public class PostController {
 
  @GetMapping("/admin/posts/search")
  public String searchPosts(@RequestParam("query") String query, Model model) {
-  model.addAttribute("posts",postService.searchPosts(query));
+  model.addAttribute("posts", postService.searchPosts(query));
   return "admin/posts";
  }
 
@@ -88,12 +88,12 @@ public class PostController {
   } else {
    comments = commentService.findAllCommentsForLoggedInUser();
   }
-  model.addAttribute("comments",comments);
+  model.addAttribute("comments", comments);
   return "admin/comments";
  }
 
  @GetMapping("/admin/posts/comments/{commentId}")
- public String deleteComment(@PathVariable("commentId") long commentId){
+ public String deleteComment(@PathVariable("commentId") long commentId) {
   commentService.deleteCommentById(commentId);
   return "redirect:/admin/posts/comments";
  }

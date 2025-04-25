@@ -24,7 +24,7 @@ public class CommentController {
   if (bindingResult.hasErrors()) {
    model.addAttribute("comment", commentDto);
    model.addAttribute("post", postService.findPostByUrl(postUrl));
-   return "/blog/view_post";
+   return "blog/view_post";
   }
   commentService.saveComment(postUrl, commentDto);
   return "redirect:/post/{postUrl}";
