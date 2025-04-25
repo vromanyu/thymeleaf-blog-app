@@ -17,7 +17,7 @@ import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import java.util.Collections;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = false)
 @RequiredArgsConstructor
 public class SpringSecurityConfiguration {
 
@@ -34,9 +34,10 @@ public class SpringSecurityConfiguration {
    .securityContext(securityContext ->
     securityContext.requireExplicitSave(false))
    .authorizeHttpRequests(requests ->
-    requests.requestMatchers("/register/**").permitAll()
+    requests
      .requestMatchers("/admin/**").hasAnyRole("ADMIN", "USER")
-     .requestMatchers("/**", "/post/**", "/page/**").permitAll()
+     .requestMatchers("/register/**","/", "/post/**", "/page/**", "/*/comments", "/error").permitAll()
+     .anyRequest().authenticated()
    )
    .formLogin(form ->
     form.loginPage("/login")
