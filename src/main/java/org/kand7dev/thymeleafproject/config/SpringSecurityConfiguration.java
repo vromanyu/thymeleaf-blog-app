@@ -47,7 +47,7 @@ public class SpringSecurityConfiguration {
    .logout(logout ->
     logout.logoutUrl("/logout").permitAll()
      .invalidateHttpSession(true).clearAuthentication(true))
-   .addFilterAfter(new CsrfTokenFilter(), BasicAuthenticationFilter.class)
+//   .addFilterAfter(new CsrfTokenFilter(), BasicAuthenticationFilter.class)
    .build();
  }
 
@@ -57,7 +57,7 @@ public class SpringSecurityConfiguration {
  }
 
  @Bean
- public PasswordEncoder passwordEncoder(){
+ public PasswordEncoder passwordEncoder() {
   return PasswordEncoderFactories.createDelegatingPasswordEncoder();
  }
 
